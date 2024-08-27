@@ -23,6 +23,29 @@ bool canBeSubsequence(string s,string t){
     return j == t.size();
 }
 
+void solve(string& s,string& t){
+    int j = 0;
+    rep(i,s.size()){
+        if(s[i] == '?'){
+            if(j < t.size()){
+                s[i] = t[j];
+                j++;
+            }
+            else{
+                s[i] = 'a';
+            }
+        }
+        else if(s[i] == t[j]){
+            j++;
+        }
+    }
+    if(j >= t.size()){
+        cout << "YES\n" << s<<"\n";
+    }else{
+        cout << "NO\n";
+    }
+}
+
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -39,32 +62,7 @@ int main()
         string t;
         cin >> t;
 
-        
-
-        bool found = false;
-
-        for (char c = 'a'; c <= 'z';c++){
-            string ans = s;
-
-            rep(i,ans.size()){
-                if(ans[i] == '?'){
-                    ans[i] = c;
-                }
-            }
-
-            if (canBeSubsequence(ans,t))
-            {
-                found = true;
-                cout << "YES" << endl;
-                cout << ans << endl;
-                break;
-            }
-        }
-
-       
-        if(!found){
-            cout << "NO" << endl;
-        }
+        solve(s,t);
     }
 
     return 0;
