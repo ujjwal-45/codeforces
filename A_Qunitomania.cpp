@@ -3,8 +3,8 @@ using namespace std;
 
 typedef long long ll;
 #define endl '\n'
-#define forr(i,x,n) for (int i = x; i < n; i++)
-#define forr1(i,x,n) for (int i = x; i <= n; i++)
+#define forr(i,x,n) for (int i = x; i < n; ++i)
+#define forr1(i,x,n) for (int i = x; i <= n; ++i)
 #define all(a) a.begin(),a.end()
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -12,6 +12,19 @@ typedef long long ll;
 using lli = long long int;
 
 const ll mod = 1000000007;
+
+bool isPerfectMelody(const vector<int> &arr)
+{
+    for (int i = 1; i < arr.size(); ++i)
+    {
+        int diff = abs(arr[i] - arr[i - 1]);
+        if (diff != 7 && diff != 5)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main()
 {
@@ -26,26 +39,17 @@ int main()
     while(t--){
         int n;
         cin >> n;
-
-        vi a(n);
+        vector<int> a(n);
         forr(i,0,n){
-            cin >>a[i];
+            cin >> a[i];
         }
-        int lastElement;
-        cin >> lastElement;
-
-        sort(a.begin(), a.end());
-        int sum = 0;
-
-        for (int i = 0; i < n; i++)
-        {
-            if(a[i]>lastElement && a[i] <= (2 * lastElement)){ // swap everytime with the last element till possible
-                swap(a[i], lastElement);
-            }
-            sum += a[i];
+        
+        if(isPerfectMelody(a)){
+            cout << "YES" << endl;
         }
-
-        cout << sum << endl;
+        else{
+            cout << "NO" << endl;
+        }
     }
 
     return 0;

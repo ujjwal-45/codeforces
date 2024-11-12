@@ -9,21 +9,18 @@ import re
 import sys
 sys.stdin = open('input.txt', 'r')
 sys.stdout = open('output.txt', 'w')
-
-
 T = int(input())
 for _ in range(T):
     n = int(input())
-    a = list(map(int,input().split()))
-    
-    ans = 0
-    for i in range(1,n//2):
-        if a[i]==a[i-1] or a[n-i] ==a[n-i-1]:
-            a[i],a[n-i-1] = a[n-i-1],a[i]
-    
-    for i in range(n-1):
-        if a[i] == a[i+1]:
-            ans+=1
+    s = str(input())
 
+    max_len = 0
+    for i in range(n):
+        if s[i] == s[0]:
+            max_len=max(max_len,i+1)
+        if s[i] == s[n-1]:
+            max_len = max(max_len,n-i)
     
-    print(ans)
+    
+    print(max_len)
+    

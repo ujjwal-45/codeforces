@@ -9,21 +9,17 @@ import re
 import sys
 sys.stdin = open('input.txt', 'r')
 sys.stdout = open('output.txt', 'w')
-
-
 T = int(input())
 for _ in range(T):
     n = int(input())
-    a = list(map(int,input().split()))
+    num_set = set()
+    for i in range(n):
+        b_num=str(input())
+        num_set.add(int(b_num,2))
     
-    ans = 0
-    for i in range(1,n//2):
-        if a[i]==a[i-1] or a[n-i] ==a[n-i-1]:
-            a[i],a[n-i-1] = a[n-i-1],a[i]
+    mex=1
+    while mex in num_set:
+        mex+=1
     
-    for i in range(n-1):
-        if a[i] == a[i+1]:
-            ans+=1
-
-    
+    ans = format(mex,'b').zfill(n)
     print(ans)

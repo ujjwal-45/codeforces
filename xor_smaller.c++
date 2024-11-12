@@ -13,29 +13,6 @@ using lli = long long int;
 
 const ll mod = 1000000007;
 
-bool solve(string s, string t,int n,int m){
-    vector<bool> v(26, 0);
-
-    forr(i,0,n){
-        v[s[i] - 'a'] = 1;
-    }
-
-    forr(i, 0, m)
-    {
-        v[t[i] - 'a'] = 1;
-    }
-
-    forr(i, 0, 26)
-    {
-        if(v[i] ==0){
-            return true;
-            break;
-        }
-    }
-
-    return false;
-}
-
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -47,20 +24,27 @@ int main()
     int t;
     cin>>t;
     while(t--){
-        int n,m;
-        cin>>n>>m;
-
-        string s;
-        string t;
-        cin >> s;
-        cin >> t;
-
-        if(solve(s,t,n,m)){
-            cout << "Yes" << endl;
+        int n;
+        cin >> n;
+        vi a(n);
+        forr(i,0,n){
+            cin >> a[i];
         }
-        else{
-            cout << "No" << endl;
+        int cnt = 0;
+
+        int x = a[0];
+        forr(i,0,n){
+            x = x & a[i];
         }
+
+    
+        for (ll j = 1; j <= (1ll<< 30);j*=2){
+           if(x&j){
+               cnt += j;
+           }
+        }
+
+        cout << cnt << endl;
     }
 
     return 0;

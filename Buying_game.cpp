@@ -13,28 +13,7 @@ using lli = long long int;
 
 const ll mod = 1000000007;
 
-bool solve(string s, string t,int n,int m){
-    vector<bool> v(26, 0);
 
-    forr(i,0,n){
-        v[s[i] - 'a'] = 1;
-    }
-
-    forr(i, 0, m)
-    {
-        v[t[i] - 'a'] = 1;
-    }
-
-    forr(i, 0, 26)
-    {
-        if(v[i] ==0){
-            return true;
-            break;
-        }
-    }
-
-    return false;
-}
 
 int main()
 {
@@ -47,20 +26,34 @@ int main()
     int t;
     cin>>t;
     while(t--){
-        int n,m;
-        cin>>n>>m;
+        int n;
+        cin >> n;
+        vector<pair<int, int>> arr(n);
+        int sum = 0, result = 0;
 
-        string s;
-        string t;
-        cin >> s;
-        cin >> t;
+        for (int i = 0; i < n; ++i)
+        {
+            cin >> arr[i].first;
+        }
 
-        if(solve(s,t,n,m)){
-            cout << "Yes" << endl;
+        for (int i = 0; i < n; ++i)
+        {
+            cin >> arr[i].second;
+            arr[i].first -= arr[i].second;
+            sum += arr[i].second;
         }
-        else{
-            cout << "No" << endl;
+
+        sort(arr.begin(), arr.end());
+        result = sum;
+        sum += arr[0].first;
+
+        for (int i = 1; i < n; i++)
+        {
+            sum += arr[i].first;
+            result = min(result, sum);
         }
+
+        cout << result << endl;
     }
 
     return 0;

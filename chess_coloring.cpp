@@ -3,8 +3,8 @@ using namespace std;
 
 typedef long long ll;
 #define endl '\n'
-#define forr(i,x,n) for (int i = x; i < n; i++)
-#define forr1(i,x,n) for (int i = x; i <= n; i++)
+#define forr(i,x,n) for (int i = x; i < n; ++i)
+#define forr1(i,x,n) for (int i = x; i <= n; ++i)
 #define all(a) a.begin(),a.end()
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -27,25 +27,16 @@ int main()
         int n;
         cin >> n;
 
-        vi a(n);
-        forr(i,0,n){
-            cin >>a[i];
-        }
-        int lastElement;
-        cin >> lastElement;
-
-        sort(a.begin(), a.end());
-        int sum = 0;
-
-        for (int i = 0; i < n; i++)
+        ll result = 0l;
+        if (n % 2 == 0)
         {
-            if(a[i]>lastElement && a[i] <= (2 * lastElement)){ // swap everytime with the last element till possible
-                swap(a[i], lastElement);
-            }
-            sum += a[i];
+            result= 2;
+        }
+        else{
+            result = (static_cast<ll>(n * n + 3)) / 2;
         }
 
-        cout << sum << endl;
+        cout << result << endl;
     }
 
     return 0;
