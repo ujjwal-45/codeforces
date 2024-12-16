@@ -1,1 +1,2 @@
-import sys
+for x in res:
+    #     print(x)
